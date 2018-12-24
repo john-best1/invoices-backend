@@ -71,6 +71,16 @@ router.route('/invoices/add').post((req,res) => {
         })
 })
 
+// get invoice by invoice Id
+router.route('/invoices/:id').get((req, res) => {
+    Invoice.findById(req.params.id, (err, invoice) => {
+        if(err)
+            console.log(err)
+        else
+            res.json(invoice)
+    })
+})
+
 
 
 
