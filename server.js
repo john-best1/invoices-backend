@@ -28,7 +28,7 @@ router.get(('/invoices'),function(req,res){
           res.json({status: false, error: "Something went wrong"});
           return;
         }
-        res.json({status: true, invoice: invoices});
+        res.json(invoices);
       });
 })
 
