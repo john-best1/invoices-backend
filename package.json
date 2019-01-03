@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "dev": "babel-watch server.js",
-    "test-mocha": "mocha --timeout 10000"
+    "test-mocha": "ng mocha --timeout 10000"
   },
   "private": true,
   "dependencies": {
