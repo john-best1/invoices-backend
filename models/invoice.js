@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 let Invoice = new Schema({
-    transactionId : Number,
-    customerId: Number,
+    transactionId : String,
+    customerId: String,
     customerName: String,
     customerStreetAddress: String,
     city: String,
@@ -17,7 +17,7 @@ let Invoice = new Schema({
         price: Number,
         quantity: Number
     }],
-    transactionDate: String,
+    transactionDate: { type: String, default: new Date().toISOString()},
     completed:{
         type: Boolean,
         default: false

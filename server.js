@@ -37,8 +37,25 @@ router.get(('/invoices/invoicesAdmin'),function(req,res){
     Invoice.find({completed: false}, function(err, invoices){
         if(err) return handleError 
         else res.json(invoices)
-    })
-}).limit(25).sort({transactionDate: -1})
+    }).limit(25).sort({transactionDate: -1})  // return a maximum of 25 invoices (narrow down via search), sort by most recent transaction first
+})
+
+// list of all uncompleted invoices, for admin main page with filter
+router.get(('/invoices/invoicesAdmin/:filter'),function(req,res){
+    let filter = req.params.filter
+    Invoice.find({$and:[
+        {completed: false},
+        {$or : [
+            {customerName:{ $regex: ".*" + filter + ".*", $options: "i"}},
+            {customerId:{ $regex: ".*" + filter + ".*", $options: "i"}},
+            {transactionId:{ $regex: ".*" + filter + ".*", $options: "i"}},
+            ]
+        }
+        ]}, function(err, invoices){
+        if(err) return handleError 
+        else res.json(invoices)
+    }).limit(25).sort({transactionDate: -1})  // return a maximum of 25 invoices (narrow down via search), sort by most recent transaction first
+})
 
 //returns a list of completed invoices for a particular customer
 router.route('/invoices/customerInvoices/:customerId').get((req,res) => {
@@ -49,13 +66,15 @@ router.route('/invoices/customerInvoices/:customerId').get((req,res) => {
 })
 
 
+
+
 // Staff sending an invoice
 router.route('/invoices/update/:id').post((req, res) => {
     Invoice.findByIdAndUpdate(req.params.id, {completed: true},(err, invoice) => {
         if (err)
             res.json(err)
         else
-            res.json('Removed successfully')
+            res.json('Sent successfully')
     })
 })
 
@@ -71,6 +90,8 @@ router.route('/invoices/add').post((req,res) => {
         })
 })
 
+
+
 // get invoice by invoice Id
 router.route('/invoices/:id').get((req, res) => {
     Invoice.findById(req.params.id, (err, invoice) => {
@@ -81,9 +102,20 @@ router.route('/invoices/:id').get((req, res) => {
     })
 })
 
+//  FOR SOME REASON THIS CRASHES POSTMAN ALTHOUGH IT SEEMS SOUND
+// // delete invoice by invoice Id
+// router.route('/invoices/delete/:id').get((req, res) => {
+//     Invoice.findOneAndDelete({_id: req.params.id}), (err, invoice) => {
+//         if (err)
+//             res.json(err)
+//         else
+//             res.json('Deleted successfully')
+//     }
+// })
 
 
-
+//start the server
 app.listen(4000, () => console.log('Express server running on port 4000'))
 
+// register route
 app.use('/', router)

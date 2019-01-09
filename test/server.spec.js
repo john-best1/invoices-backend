@@ -71,7 +71,35 @@ describe("Post a new invoice", function(){
     }); 
 })
 
-
+    // // Test will pass if the invoice is deleted based on an ID
+    // describe("Delete a todo by id", function(){
+    //     it("should delete a todo by id", function(done){
+    //         var InvoiceMock = sinon.mock(new Invoice({transactionId : 9999 ,customerId: 9999,customerName: "John Smith",customerStreetAddress: "3 The Street", city: "CityVille",
+    //         countyOrState: "Statington", postcode: "dh5124", phone: "01234345654", email: "fake@gmail.com",
+    //         orders:[{itemId: 1 ,description: "lemons", price: "5", quantity: "15"}],
+    //             transactionDate: "10/10/2010"}));
+    //         var expectedResult = { status: true };
+    //         InvoiceMock.expects('remove').withArgs({_id: 12345}).yields(null, expectedResult);
+    //         Invoice.remove({_id: 12345}, function (err, result) {
+    //             InvoiceMock.verify();
+    //             InvoiceMock.restore();
+    //             expect(result.status).to.be.true;
+    //             done();
+    //         });
+    //     });
+    //     // Test will pass if the todo is not deleted based on an ID
+    //     it("should return error if delete action is failed", function(done){
+    //         var TodoMock = sinon.mock(Todo);
+    //         var expectedResult = { status: false };
+    //         TodoMock.expects('remove').withArgs({_id: 12345}).yields(expectedResult, null);
+    //         Todo.remove({_id: 12345}, function (err, result) {
+    //             TodoMock.verify();
+    //             TodoMock.restore();
+    //             expect(err.status).to.not.be.true;
+    //             done();
+    //         });
+    //     });
+    // });
 //// Test will pass if the invoice is updated based on an ID
 // describe("Update a new invoice by id", function(){
 //     it("should update an invoice by id", function(done){
