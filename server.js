@@ -38,7 +38,7 @@ router.get(('/invoices/invoicesAdmin'),function(req,res){
         if(err) return handleError 
         else res.json(invoices)
     })
-})
+}).limit(25).sort({transactionDate: -1})
 
 //returns a list of completed invoices for a particular customer
 router.route('/invoices/customerInvoices/:customerId').get((req,res) => {
