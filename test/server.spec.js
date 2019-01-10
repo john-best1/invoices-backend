@@ -71,62 +71,66 @@ describe("Post a new invoice", function(){
     }); 
 })
 
-    // // Test will pass if the invoice is deleted based on an ID
-    // describe("Delete a todo by id", function(){
-    //     it("should delete a todo by id", function(done){
-    //         var InvoiceMock = sinon.mock(new Invoice({transactionId : 9999 ,customerId: 9999,customerName: "John Smith",customerStreetAddress: "3 The Street", city: "CityVille",
-    //         countyOrState: "Statington", postcode: "dh5124", phone: "01234345654", email: "fake@gmail.com",
-    //         orders:[{itemId: 1 ,description: "lemons", price: "5", quantity: "15"}],
-    //             transactionDate: "10/10/2010"}));
-    //         var expectedResult = { status: true };
-    //         InvoiceMock.expects('remove').withArgs({_id: 12345}).yields(null, expectedResult);
-    //         Invoice.remove({_id: 12345}, function (err, result) {
-    //             InvoiceMock.verify();
-    //             InvoiceMock.restore();
-    //             expect(result.status).to.be.true;
-    //             done();
-    //         });
-    //     });
-    //     // Test will pass if the todo is not deleted based on an ID
-    //     it("should return error if delete action is failed", function(done){
-    //         var TodoMock = sinon.mock(Todo);
-    //         var expectedResult = { status: false };
-    //         TodoMock.expects('remove').withArgs({_id: 12345}).yields(expectedResult, null);
-    //         Todo.remove({_id: 12345}, function (err, result) {
-    //             TodoMock.verify();
-    //             TodoMock.restore();
-    //             expect(err.status).to.not.be.true;
-    //             done();
-    //         });
-    //     });
-    // });
-//// Test will pass if the invoice is updated based on an ID
-// describe("Update a new invoice by id", function(){
-//     it("should update an invoice by id", function(done){
-//         var InvoiceMock = sinon.mock(new Invoice({ completed : true}));
-//         var invoice = InvoiceMock.object;
-//         var expectedResult = {status : true}
-//         InvoiceMock.expects('save').withArgs({_id: 12345}).yields(null, expectedResult);
-//         console.log("Got HERE!!!!")
-//         invoice.save(function (err, result) {
+//// Tests for delete however delete currently doesnt work
+// // Test will pass if the invoice is deleted based on an ID
+// describe("Delete a invoice by id", function(){
+//     it("should delete a invoice by id", function(done){
+//         var InvoiceMock = sinon.mock(new Invoice({transactionId : 9999 ,customerId: 9999,customerName: "John Smith",customerStreetAddress: "3 The Street", city: "CityVille",
+//         countyOrState: "Statington", postcode: "dh5124", phone: "01234345654", email: "fake@gmail.com",
+//         orders:[{itemId: 1 ,description: "lemons", price: "5", quantity: "15"}],
+//             transactionDate: "10/10/2010"}));
+//         var expectedResult = { status: true };
+//         InvoiceMock.expects('remove').withArgs({_id: 12345}).yields(null, expectedResult);
+//         Invoice.remove({_id: 12345}, function (err, result) {
 //             InvoiceMock.verify();
 //             InvoiceMock.restore();
 //             expect(result.status).to.be.true;
 //             done();
 //         });
 //     });
-// // Test will pass if the invoice is not updated based on an ID
-// it("should return error if update action is failed", function(done){
-//     var InvoiceMock = sinon.mock(new Invoice({ completed: true}));
-//     var invoice = InvoiceMock.object;
-//     var expectedResult = { status: false };
-//     InvoiceMock.expects('save').withArgs({_id: 12345}).yields(expectedResult, null);
-//     invoice.save(function (err, result) {
-//         InvoiceMock.verify();
-//         InvoiceMock.restore();
-//         expect(err.status).to.not.be.true;
-//         done();
+//     // Test will pass if the todo is not deleted based on an ID
+//     it("should return error if delete action is failed", function(done){
+//         var InvoiceMock = sinon.mock(Invoice);
+//         var expectedResult = { status: false };
+//         InvoiceMock.expects('remove').withArgs({_id: 12345}).yields(expectedResult, null);
+//         Invoice.remove({_id: 12345}, function (err, result) {
+//             InvoiceMock.verify();
+//             InvoiceMock.restore();
+//             expect(err.status).to.not.be.true;
+//             done();
+//         });
 //     });
-//     });
-//});
+// });
+
+
+// TODO FIX THESE
+// Test will pass if the invoice is updated based on an ID
+describe("Update a new invoice by id", function(){
+    it("should update an invoice by id", function(done){
+        var InvoiceMock = sinon.mock(new Invoice({ completed : true}));
+        var invoice = InvoiceMock.object;
+        var expectedResult = {status : true}
+        InvoiceMock.expects('save').withArgs({_id: 12345}).yields(null, expectedResult);
+        invoice.save(function (err, result) {
+            InvoiceMock.verify();
+            InvoiceMock.restore();
+            expect(result.status).to.be.true;
+            done();
+        });
+    });
+
+// Test will pass if the invoice is not updated based on an ID
+it("should return error if update action is failed", function(done){
+    var InvoiceMock = sinon.mock(new Invoice({ completed: true}));
+    var invoice = InvoiceMock.object;
+    var expectedResult = { status: false };
+    InvoiceMock.expects('save').withArgs({_id: 12345}).yields(expectedResult, null);
+    invoice.save(function (err, result) {
+        InvoiceMock.verify();
+        InvoiceMock.restore();
+        expect(err.status).to.not.be.true;
+        done();
+    });
+    });
+});
 

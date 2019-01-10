@@ -114,7 +114,7 @@ router.route('/invoices/:id').get((req, res) => {
     })
 })
 
-//  FOR SOME REASON THIS CRASHES POSTMAN ALTHOUGH IT SEEMS SOUND
+// // FOR SOME REASON THIS CRASHES POSTMAN ALTHOUGH IT SEEMS SOUND
 // // delete invoice by invoice Id
 // router.route('/invoices/delete/:id').get((req, res) => {
 //     Invoice.findOneAndDelete({_id: req.params.id}), (err, invoice) => {
