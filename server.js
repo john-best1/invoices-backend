@@ -8,6 +8,9 @@ const Invoice = require('./models/Invoice')
 const app = express()
 const router = express.Router()
 
+const secret = "ilovesalmonsandwiches"
+var jwt = require('jsonwebtoken')
+
 app.use(cors())
 app.use(bodyParser.json())
 
@@ -34,10 +37,21 @@ router.get(('/invoices'),function(req,res){
 
 // list of all uncompleted invoices, for admin main page
 router.get(('/invoices/invoicesAdmin'),function(req,res){
-    Invoice.find({completed: false}, function(err, invoices){
-        if(err) return handleError 
-        else res.json(invoices)
-    }).limit(25).sort({transactionDate: -1})  // return a maximum of 25 invoices (narrow down via search), sort by most recent transaction first
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    if (token)
+        //verify secret
+        jwt.verify(token, secret, Invoice.find({completed: false}, function(err, invoices){
+            if(err) {
+              res.json({status: false, error: "Something went wrong"});
+              return;
+            }
+            res.json(invoices);
+          }).limit(25).sort({transactionDate: -1}));  // return a maximum of 25 invoices (narrow down via search), sort by most recent transaction first
+    else 
+        return res.status(403).send({ 
+        success: false, 
+        message: 'No token provided.' 
+    })
 })
 
 // list of all uncompleted invoices, for admin main page with filter
@@ -64,8 +78,6 @@ router.route('/invoices/customerInvoices/:customerId').get((req,res) => {
         else res.json(invoices)
     })
 })
-
-
 
 
 // Staff sending an invoice
