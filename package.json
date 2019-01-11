@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "start_windows": "set NODE_ENV=production&&babel-watch server.js",
     "build": "ng build",
     "test": "mocha",

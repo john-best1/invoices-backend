@@ -22,6 +22,8 @@ connection.once('open', () => {
     console.log('MongoDB database connection established successfully!')
 })
 
+const port = process.env.PORT || 4000
+
 
 
 // list of all invoices, completed and uncompleted
@@ -135,7 +137,7 @@ router.route('/invoices/:id').get((req, res) => {
 
 
 //start the server
-app.listen(4000, () => console.log('Express server running on port 4000'))
+app.listen(port, () => console.log('Express server running on port 4000'))
 
 // register route
 app.use('/', router)
