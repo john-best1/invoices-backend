@@ -79,6 +79,14 @@ router.route('/invoices/customerInvoices/:customerId').get((req,res) => {
     })
 })
 
+//returns an invoice from invoice id
+router.route('/invoices/customerInvoice/:id').get((req,res) => {
+    Invoice.findOne({_id : req.params.id, completed: true}, function(err, invoices){
+        if(err) return handleError 
+        else res.json(invoices)
+    })
+})
+
 
 // Staff sending an invoice
 router.route('/invoices/update/:id').post((req, res) => {
