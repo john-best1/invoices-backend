@@ -1,0 +1,40 @@
+config:
+  target: 'http://localhost:4000'
+  phases:
+    - duration: 30
+      arrivalRate: 600
+scenarios:
+  - flow:
+      - post:
+          url: "/invoices/add"
+          headers: {'content-type' : 'application/json'}
+          json: {"transactionId": "4120",
+                 "customerId": "3011",
+                 "customerName": "John Jones",
+                 "customerStreetAddress": "42 Mill Lane",
+                 "city": "Durham",
+                 "countyOrState": "Durham",
+                 "postcode": "DH6 1EH",
+                 "phone": "07581419448",
+                 "email": "jonesy_2006@hotmail.co.uk",
+                 "orders": [
+                 {
+                   "itemId": 1111,
+                   "description": "Washing Machine",
+                   "price": 199.99,
+                   "quantity": 1
+                 },
+                 {
+                   "itemId": 1112,
+                   "description": "Tide Pods",
+                   "price": 4.99,
+                   "quantity": 4
+                 },
+                 {
+                   "itemId": 1113,
+                   "description": "Laundry Basket",
+                   "price": 8.99,
+                   "quantity": 1
+                 }
+                 ]
+          }

@@ -8,6 +8,7 @@ const Invoice = require('./models/Invoice')
 const app = express()
 const router = express.Router()
 
+
 const secret = "ilovesalmonsandwiches"
 var jwt = require('jsonwebtoken')
 
@@ -105,7 +106,7 @@ router.route('/invoices/add').post((req,res) => {
     let invoice = new Invoice(req.body)
     invoice.save()
         .then(invoice => {
-            res.status(200).json({'invoice': 'Added successfully'})
+            res.status(200).json({'invoice': 'Added Successfully'})
         })
         .catch(err => {
             res.status(400).send('Failed to create new record')
